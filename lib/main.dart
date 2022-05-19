@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:turismo/screens/create-new-account.dart';
-import 'package:turismo/screens/forgot-password.dart';
-import './screens/login-page.dart';
+import 'screens/login-screens/login-page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,8 +23,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/Login',
       routes: {
         '/Login': (context) => const LoginPage(),
-        'ForgotPassword': (context) => const ForgotPassword(),
-        'CreateNewAccount': (context) => const CreateNewAccount(),
       },
     );
   }
