@@ -1,4 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, deprecated_member_use
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:turismo/palette.dart';
@@ -12,7 +14,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _email = "";
+    String email = "";
 
     TextEditingController _contra = TextEditingController();
 
@@ -93,7 +95,7 @@ class LoginPage extends StatelessWidget {
                                     fontSize: 22,
                                   ),
                                 ),
-                                onChanged: (value) => _email = value,
+                                onChanged: (value) => email = value,
                               ),
                               SizedBox(height: 8),
                               TextFormField(
@@ -175,7 +177,7 @@ class LoginPage extends StatelessWidget {
                               textColor: Colors.white,
                               onPressed: () {
                                 if (_formkey.currentState!.validate()) {
-                                  login(_email, _contra.text, context);
+                                  login(email, _contra.text, context);
                                 }
                               },
                             ),
@@ -212,13 +214,18 @@ class LoginPage extends StatelessWidget {
 }
 
 Future<String?> login(String _correo, String _contra, context) async {
-  final url = Uri.http("192.168.0.8:8090", "/api/auth/login");
+  final url = Uri.parse("http://192.168.0.8:8090/api/auth/login");
   final resp =
       await http.get(url, headers: {'email': _correo, 'password': _contra});
 
   if (resp.statusCode == 200) {
+    // print(resp);
+    // String body = utf8.decode(resp.bodyBytes);
+    // print(body);
+    // final datos = jsonDecode(body);
+    // print(datos);
+    //guardarDatos(datos['name'], datos['email']);
     Navigator.push(context, MaterialPageRoute(builder: (_) => const Menu()));
   }
-
   return null;
 }

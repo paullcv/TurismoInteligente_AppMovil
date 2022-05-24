@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:turismo/screens/Inicio-screens/inicio.dart';
+import 'package:turismo/screens/Inicio-screens/mis-paquetes.dart';
+import 'package:turismo/screens/Inicio-screens/perfil.dart';
 
 class Rutas extends StatelessWidget {
   final int index;
@@ -11,8 +13,8 @@ class Rutas extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> ListaW = [
       const Inicio(),
-      //const MisPaquetes(),
-      //const Perfil(),
+      const MisPaquetes(),
+      Perfil(),
     ];
     return ListaW[index];
   }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:turismo/routes/rutas-menu.dart';
 import 'package:turismo/widgets/bottom-nav.dart';
+import 'package:turismo/widgets/curved-bottom-nav.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -14,10 +15,11 @@ class Menu extends StatefulWidget {
 class _InicioState extends State<Menu> {
   int index = 0;
   BottNav? botnavbar;
+  BottomNavBar? curvbot;
 
   @override
   void initState() {
-    botnavbar = BottNav(currentIndex: (i) {
+    curvbot = BottomNavBar(currentIndex: (i) {
       setState(() {
         index = i;
       });
@@ -28,7 +30,7 @@ class _InicioState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: botnavbar,
+      bottomNavigationBar: curvbot,
       body: Rutas(index: index),
     );
   }
