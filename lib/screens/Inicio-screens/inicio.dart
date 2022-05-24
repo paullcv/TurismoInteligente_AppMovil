@@ -32,16 +32,14 @@ class _InicioState extends State<Inicio> {
         width: 60,
         decoration: BoxDecoration(
           color: _selectedIndex == index
-              ? Theme.of(context).dividerColor
+              ? const Color.fromARGB(73, 238, 238, 238)
               : Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Icon(
           _icons[index],
           size: 25,
-          color: _selectedIndex == index
-              ? Theme.of(context).primaryColorLight
-              : Colors.black,
+          color: _selectedIndex == index ? Colors.white : Colors.black,
         ),
       ),
     );
@@ -55,18 +53,20 @@ class _InicioState extends State<Inicio> {
           image: 'assets/images/16824.jpeg',
         ),
         Scaffold(
-          backgroundColor: const Color.fromARGB(182, 158, 158, 158),
+          backgroundColor: const Color.fromARGB(0, 63, 55, 55),
           body: SafeArea(
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 30),
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.only(left: 20, right: 120),
+                  padding: EdgeInsets.only(left: 20, right: 10),
                   child: Text(
-                    '¿Que le gustaria encontrar?',
+                    '¿Qué le gustaría encontrar?',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontFamily: 'Caveat',
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
                 ),

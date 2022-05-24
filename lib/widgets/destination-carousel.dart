@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:turismo/models/destination-model.dart';
 import 'package:turismo/screens/Inicio-screens/destination-page.dart';
+import 'package:turismo/screens/Inicio-screens/destinos.dart';
 
 class DestinationCarousel extends StatelessWidget {
   const DestinationCarousel({Key? key}) : super(key: key);
@@ -20,12 +21,16 @@ class DestinationCarousel extends StatelessWidget {
               const Text(
                 'Top Destinos',
                 style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                  fontStyle: FontStyle.italic,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
               ),
               GestureDetector(
-                onTap: () => print('Ver todos'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Destino())),
                 child: const Text(
                   'Ver todos',
                   style: TextStyle(
@@ -41,7 +46,6 @@ class DestinationCarousel extends StatelessWidget {
         ),
         SizedBox(
           height: 300,
-          //color: Colors.blue,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: destinations.length,
@@ -59,7 +63,6 @@ class DestinationCarousel extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   width: 210,
-                  //color: Colors.red,
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: <Widget>[
@@ -101,9 +104,8 @@ class DestinationCarousel extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          // ignore: prefer_const_literals_to_create_immutables
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               color: Colors.black26,
                               offset: Offset(0.0, 2.0),
                               blurRadius: 6,

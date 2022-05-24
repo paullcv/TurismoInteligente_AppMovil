@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:turismo/models/hotel-model.dart';
+import 'package:turismo/screens/Inicio-screens/hoteles-page.dart';
 
 class HotelCarousel extends StatelessWidget {
   const HotelCarousel({Key? key}) : super(key: key);
@@ -18,12 +19,16 @@ class HotelCarousel extends StatelessWidget {
               const Text(
                 'Hoteles Exclusivos',
                 style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                  fontStyle: FontStyle.italic,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
               ),
               GestureDetector(
-                //onTap: () => print('Ver todos'),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Hoteles())),
                 child: const Text(
                   'Ver todos',
                   style: TextStyle(
@@ -39,7 +44,6 @@ class HotelCarousel extends StatelessWidget {
         ),
         SizedBox(
           height: 300,
-          //color: Colors.blue,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: hotels.length,
@@ -48,7 +52,6 @@ class HotelCarousel extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.all(10),
                 width: 240,
-                //color: Colors.red,
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
@@ -65,7 +68,6 @@ class HotelCarousel extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Text(
                                 hotel.name,
@@ -99,9 +101,8 @@ class HotelCarousel extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        // ignore: prefer_const_literals_to_create_immutables
-                        boxShadow: [
-                          const BoxShadow(
+                        boxShadow: const [
+                          BoxShadow(
                             color: Colors.black26,
                             offset: Offset(0.0, 2.0),
                             blurRadius: 6,

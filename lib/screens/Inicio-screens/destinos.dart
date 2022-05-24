@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:turismo/widgets/background-images.dart';
 
-class Hoteles extends StatelessWidget {
-  const Hoteles({Key? key}) : super(key: key);
+class Destino extends StatelessWidget {
+  const Destino({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Hoteles extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Hoteles',
+            'Lugares Turisticos',
             style: TextStyle(
               fontSize: 40,
               color: Colors.white,

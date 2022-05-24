@@ -17,8 +17,8 @@ class Perfil extends StatelessWidget {
 
   String? _correo = "Cliente@gmail.com";
   String? _nombre = "Cliente Usuario";
-  String? _edad = "21";
-  String? _telefono = "1234567";
+  final String? _edad = "21";
+  final String? _telefono = "1234567";
 
   Future<void> obtenerDatos() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
