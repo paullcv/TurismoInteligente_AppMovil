@@ -6,9 +6,14 @@ import 'package:turismo/models/destination-model.dart';
 import 'package:turismo/screens/Inicio-screens/destination-page.dart';
 import 'package:turismo/screens/Inicio-screens/destinos.dart';
 
-class DestinationCarousel extends StatelessWidget {
+class DestinationCarousel extends StatefulWidget {
   const DestinationCarousel({Key? key}) : super(key: key);
 
+  @override
+  State<DestinationCarousel> createState() => _DestinationCarouselState();
+}
+
+class _DestinationCarouselState extends State<DestinationCarousel> {
   @override
   Widget build(BuildContext context) {
     return Column(

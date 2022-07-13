@@ -14,7 +14,7 @@ class Rutas extends StatelessWidget {
     List<Widget> ListaW = [
       const Inicio(),
       const MisPaquetes(),
-      Perfil(),
+      const Perfil(),
     ];
     return ListaW[index];
   }

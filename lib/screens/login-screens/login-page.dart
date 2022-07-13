@@ -1,8 +1,9 @@
-// ignore_for_file: file_names, prefer_const_constructors, deprecated_member_use
-// import 'dart:convert';
+// ignore_for_file: file_names, prefer_const_constructors, deprecated_member_use, body_might_complete_normally_nullable
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turismo/palette.dart';
 import 'package:turismo/screens/Inicio-screens/menu.dart';
 import 'package:turismo/screens/login-screens/create-new-account.dart';
@@ -157,7 +158,7 @@ class LoginPage extends StatelessWidget {
                         Column(
                           children: [
                             SizedBox(
-                              height: 100,
+                              height: 150,
                             ),
                             FlatButton(
                               shape: RoundedRectangleBorder(
@@ -177,7 +178,7 @@ class LoginPage extends StatelessWidget {
                               textColor: Colors.white,
                               onPressed: () {
                                 if (_formkey.currentState!.validate()) {
-                                  login(email, _contra.text, context);
+                                  _login(email, _contra.text, context);
                                 }
                               },
                             ),
@@ -213,19 +214,39 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-Future<String?> login(String _correo, String _contra, context) async {
-  final url = Uri.parse("http://192.168.0.8:8090/api/auth/login");
+Future<String?> _login(String _correo, String _contra, context) async {
+  final url = Uri.parse("http://192.168.0.20:8080/api/auth/login");
   final resp =
-      await http.get(url, headers: {'email': _correo, 'password': _contra});
+      await http.post(url, body: {'email': _correo, 'password': _contra});
 
-  if (resp.statusCode == 200) {
-    // print(resp);
-    // String body = utf8.decode(resp.bodyBytes);
-    // print(body);
-    // final datos = jsonDecode(body);
-    // print(datos);
-    //guardarDatos(datos['name'], datos['email']);
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const Menu()));
+  if (resp.body != '') {
+    var datos = jsonDecode(resp.body);
+    _guardarDatos(
+        datos['data']['name'],
+        datos['data']['email'],
+        datos['data']['carnetIdentidad'],
+        datos['data']['telefono'],
+        datos['data']['edad'],
+        datos['token']);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const Menu()),
+        (route) => false);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error al iniciar sesion"),
+      ),
+    );
   }
-  return null;
+}
+
+Future<void> _guardarDatos(
+    nombre, correo, carnet, telefono, edad, token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('name', nombre);
+  await prefs.setString('email', correo);
+  await prefs.setString('carnet', carnet);
+  await prefs.setString('telefono', telefono);
+  await prefs.setString('edad', edad);
+  await prefs.setString('token', token);
 }

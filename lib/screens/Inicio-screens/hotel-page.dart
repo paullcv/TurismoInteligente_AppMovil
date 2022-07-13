@@ -1,13 +1,21 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:turismo/models/destination-model.dart';
-import 'package:turismo/screens/Inicio-screens/hotel-page.dart';
+import 'package:turismo/screens/Inicio-screens/habitaciones-page.dart';
 import 'package:turismo/widgets/background-images.dart';
 
-class Hoteles extends StatelessWidget {
-  const Hoteles({Key? key}) : super(key: key);
+import '../../models/hotel-model.dart';
 
+class HotelPage extends StatefulWidget {
+  const HotelPage({Key? key, required this.ciudad}) : super(key: key);
+
+  final String ciudad;
+
+  @override
+  State<HotelPage> createState() => _HotelPageState();
+}
+
+class _HotelPageState extends State<HotelPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -26,9 +34,9 @@ class Hoteles extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text(
-              'Hoteles en...',
-              style: TextStyle(
+            title: Text(
+              widget.ciudad,
+              style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,
               ),
@@ -37,15 +45,15 @@ class Hoteles extends StatelessWidget {
           ),
           backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           body: ListView.builder(
-            itemCount: destinations.length,
+            itemCount: hotels.length,
             itemBuilder: (BuildContext contex, int index) {
-              Destination destination = destinations[index];
+              Hotel hotel = hotels[index];
               return GestureDetector(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => HotelPage(
-                      ciudad: destination.ciudad,
+                    builder: (_) => HabitacionPage(
+                      hotel: hotel,
                     ),
                   ),
                 ),
@@ -69,13 +77,13 @@ class Hoteles extends StatelessWidget {
                         child: Stack(
                           children: <Widget>[
                             Hero(
-                              tag: destination.imageUrl,
+                              tag: hotel.imageUrl,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image(
                                   height: 180,
                                   width: 300,
-                                  image: AssetImage(destination.imageUrl),
+                                  image: AssetImage(hotel.imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -83,14 +91,19 @@ class Hoteles extends StatelessWidget {
                             Positioned(
                               left: 10,
                               bottom: 10,
-                              child: Text(
-                                destination.ciudad,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1.2,
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    hotel.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

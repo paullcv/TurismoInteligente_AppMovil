@@ -1,9 +1,12 @@
 // ignore_for_file: file_names, deprecated_member_use
 // import 'dart:convert';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turismo/palette.dart';
 import 'package:turismo/screens/Inicio-screens/menu.dart';
 import 'package:turismo/widgets/background-images.dart';
@@ -13,9 +16,11 @@ class CreateNewAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _nombre = "";
-    String _correo = "";
-
+    TextEditingController _nombre = TextEditingController();
+    TextEditingController _correo = TextEditingController();
+    TextEditingController _telefono = TextEditingController();
+    TextEditingController _carnet = TextEditingController();
+    TextEditingController _edad = TextEditingController();
     TextEditingController _contra = TextEditingController();
     TextEditingController _confcontra = TextEditingController();
 
@@ -46,7 +51,7 @@ class CreateNewAccount extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.13),
+                    SizedBox(height: size.height * 0.06),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Form(
@@ -55,6 +60,7 @@ class CreateNewAccount extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextFormField(
+                              controller: _nombre,
                               autocorrect: false,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -93,8 +99,9 @@ class CreateNewAccount extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: size.height * 0.03),
+                            SizedBox(height: size.height * 0.01),
                             TextFormField(
+                              controller: _correo,
                               autocorrect: false,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -146,7 +153,7 @@ class CreateNewAccount extends StatelessWidget {
                                 color: Colors.white,
                                 fontSize: 22,
                               ),
-                              keyboardType: TextInputType.emailAddress,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.grey.withOpacity(0.6),
@@ -179,7 +186,7 @@ class CreateNewAccount extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: size.height * 0.03),
+                            SizedBox(height: size.height * 0.01),
                             TextFormField(
                               controller: _confcontra,
                               autocorrect: false,
@@ -224,6 +231,129 @@ class CreateNewAccount extends StatelessWidget {
                               },
                             ),
                             SizedBox(height: size.height * 0.1),
+                            TextFormField(
+                              controller: _carnet,
+                              autocorrect: false,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey.withOpacity(0.6),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: "Carnet identidad",
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.info_rounded,
+                                  color: Colors.white,
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                errorStyle: const TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Ingrese un numero de carnet";
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: size.height * 0.01),
+                            TextFormField(
+                              controller: _telefono,
+                              autocorrect: false,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey.withOpacity(0.6),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: "Telefono",
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.phone,
+                                  color: Colors.white,
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                errorStyle: const TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Ingrese su numero de telefono";
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: size.height * 0.01),
+                            TextFormField(
+                              controller: _edad,
+                              autocorrect: false,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey.withOpacity(0.6),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelText: "Edad",
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.white,
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                errorStyle: const TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Ingrese su edad";
+                                }
+                                return null;
+                              },
+                            ),
+                            SizedBox(height: size.height * 0.05),
                             Center(
                               child: FlatButton(
                                 shape: RoundedRectangleBorder(
@@ -243,7 +373,13 @@ class CreateNewAccount extends StatelessWidget {
                                 textColor: Colors.white,
                                 onPressed: () {
                                   if (_formkey.currentState!.validate()) {
-                                    register(_nombre, _correo, _contra.text,
+                                    register(
+                                        _nombre.text,
+                                        _correo.text,
+                                        _contra.text,
+                                        _carnet.text,
+                                        _telefono.text,
+                                        _edad.text,
                                         context);
                                   }
                                 },
@@ -285,23 +421,51 @@ class CreateNewAccount extends StatelessWidget {
   }
 }
 
-Future<String?> register(
-    String _nombre, String _correo, String _contra, context) async {
-  // String _baseUrl = "192.168.0.8:8090";
-  // final url = Uri.http(_baseUrl, '/api/auth/register',
-  //     {'name': _nombre, 'email': _correo, 'password': _contra});
-  // final resp = await http.post(url);
-  final url = Uri.parse("http://192.168.0.8:8090/api/auth/register");
-  final resp = await http.post(url,
-      body: {'name': _nombre, 'email': _correo, 'password': _contra});
-  if (resp.statusCode == 200) {
-    // print(resp.bodyBytes);
-    // String body = utf8.decode(resp.bodyBytes);
-    // print(body);
-    // final datos = jsonDecode(body);
-    // print(datos);
-    //guardarDatos(datos['name'], datos['email']);
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const Menu()));
+Future<String?> register(String _nombre, String _correo, String _contra,
+    String _carnet, String _telefono, String _edad, context) async {
+  final url = Uri.parse("http://127.0.0.1:8000/api/auth/register");
+  final resp = await http.post(url, body: {
+    'name': _nombre,
+    'email': _correo,
+    'password': _contra,
+    'carnetIdentidad': _carnet,
+    'telefono': _telefono,
+    'edad': _edad,
+  });
+  if (resp.body != '') {
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text("Registrado correctamente"),
+    //   ),
+    // );
+    var datos = jsonDecode(resp.body);
+    _guardarDatos(
+        datos['data']['name'],
+        datos['data']['email'],
+        datos['data']['carnetIdentidad'],
+        datos['data']['telefono'],
+        datos['data']['edad'],
+        datos['token']);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const Menu()),
+        (route) => false);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error al registrarse"),
+      ),
+    );
   }
   return null;
+}
+
+Future<void> _guardarDatos(
+    nombre, correo, carnet, telefono, edad, token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('name', nombre);
+  await prefs.setString('email', correo);
+  await prefs.setString('carnet', carnet);
+  await prefs.setString('telefono', telefono);
+  await prefs.setString('edad', edad);
+  await prefs.setString('token', token);
 }

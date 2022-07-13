@@ -1,13 +1,19 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:turismo/models/destination-model.dart';
-import 'package:turismo/screens/Inicio-screens/hotel-page.dart';
+import 'package:turismo/models/restaurant-model.dart';
 import 'package:turismo/widgets/background-images.dart';
 
-class Hoteles extends StatelessWidget {
-  const Hoteles({Key? key}) : super(key: key);
+class RestaurantPage extends StatefulWidget {
+  const RestaurantPage({Key? key, required this.ciudad}) : super(key: key);
 
+  final String ciudad;
+
+  @override
+  State<RestaurantPage> createState() => _RestaurantPageState();
+}
+
+class _RestaurantPageState extends State<RestaurantPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -26,9 +32,9 @@ class Hoteles extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text(
-              'Hoteles en...',
-              style: TextStyle(
+            title: Text(
+              widget.ciudad,
+              style: const TextStyle(
                 fontSize: 30,
                 color: Colors.white,
               ),
@@ -37,18 +43,11 @@ class Hoteles extends StatelessWidget {
           ),
           backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           body: ListView.builder(
-            itemCount: destinations.length,
+            itemCount: restaurantes.length,
             itemBuilder: (BuildContext contex, int index) {
-              Destination destination = destinations[index];
+              Restaurant restaurant = restaurantes[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HotelPage(
-                      ciudad: destination.ciudad,
-                    ),
-                  ),
-                ),
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   child: Stack(
@@ -69,13 +68,13 @@ class Hoteles extends StatelessWidget {
                         child: Stack(
                           children: <Widget>[
                             Hero(
-                              tag: destination.imageUrl,
+                              tag: restaurant.imageUrl,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image(
                                   height: 180,
                                   width: 300,
-                                  image: AssetImage(destination.imageUrl),
+                                  image: AssetImage(restaurant.imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -83,14 +82,19 @@ class Hoteles extends StatelessWidget {
                             Positioned(
                               left: 10,
                               bottom: 10,
-                              child: Text(
-                                destination.ciudad,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1.2,
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    restaurant.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

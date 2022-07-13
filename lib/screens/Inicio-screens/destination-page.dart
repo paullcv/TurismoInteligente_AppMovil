@@ -28,7 +28,7 @@ class _DestinationPageState extends State<DestinationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[350],
+      backgroundColor: const Color.fromARGB(255, 63, 55, 55),
       body: Column(
         children: <Widget>[
           Stack(
@@ -65,32 +65,11 @@ class _DestinationPageState extends State<DestinationPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 10.0, vertical: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      iconSize: 30.0,
-                      color: Colors.black,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                        IconButton(
-                          icon: const Icon(FontAwesomeIcons.sortAmountDown),
-                          iconSize: 25.0,
-                          color: Colors.black,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
-                    ),
-                  ],
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  iconSize: 30.0,
+                  color: Colors.white,
+                  onPressed: () => Navigator.pop(context),
                 ),
               ),
               Positioned(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:turismo/widgets/background-images.dart';
 import 'package:turismo/widgets/destination-carousel.dart';
 import 'package:turismo/widgets/hotel-carousel.dart';
+import 'package:turismo/widgets/restaurant-carousel.dart';
 
 class Inicio extends StatefulWidget {
   const Inicio({Key? key}) : super(key: key);
@@ -12,39 +12,6 @@ class Inicio extends StatefulWidget {
 }
 
 class _InicioState extends State<Inicio> {
-  int _selectedIndex = 0;
-  final List<IconData> _icons = [
-    FontAwesomeIcons.plane,
-    FontAwesomeIcons.bed,
-    FontAwesomeIcons.personWalking,
-    FontAwesomeIcons.burger,
-  ];
-
-  Widget _buildIcon(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      child: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-          color: _selectedIndex == index
-              ? const Color.fromARGB(73, 238, 238, 238)
-              : Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Icon(
-          _icons[index],
-          size: 25,
-          color: _selectedIndex == index ? Colors.white : Colors.black,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -70,21 +37,38 @@ class _InicioState extends State<Inicio> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: _icons
-                      .asMap()
-                      .entries
-                      .map(
-                        (MapEntry map) => _buildIcon(map.key),
-                      )
-                      .toList(),
+                  children: const [
+                    Icon(
+                      Icons.airplanemode_active,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.fastfood_outlined,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.directions_walk_rounded,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.hotel,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 const DestinationCarousel(),
                 const SizedBox(height: 20),
                 const HotelCarousel(),
+                const SizedBox(height: 20),
+                const RestaurantCarousel(),
               ],
             ),
           ),

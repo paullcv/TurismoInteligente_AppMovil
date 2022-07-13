@@ -1,29 +1,19 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:turismo/models/hotel-model.dart';
-import 'package:turismo/screens/Inicio-screens/habitaciones-page.dart';
-import 'package:turismo/screens/Inicio-screens/hoteles-page.dart';
+import 'package:turismo/models/restaurant-model.dart';
+import 'package:turismo/screens/Inicio-screens/restaurantes-page.dart';
 
-class HotelCarousel extends StatefulWidget {
-  const HotelCarousel({Key? key}) : super(key: key);
+class RestaurantCarousel extends StatefulWidget {
+  const RestaurantCarousel({Key? key}) : super(key: key);
 
   @override
-  State<HotelCarousel> createState() => _HotelCarouselState();
+  State<RestaurantCarousel> createState() => _RestaurantCarouselState();
 }
 
-class _HotelCarouselState extends State<HotelCarousel> {
+class _RestaurantCarouselState extends State<RestaurantCarousel> {
   @override
   Widget build(BuildContext context) {
-    Text _buildRatingStars(int rating) {
-      String stars = '';
-      for (int i = 0; i < rating; i++) {
-        stars += '⭐ ';
-      }
-      stars.trim();
-      return Text(stars);
-    }
-
     return Column(
       children: <Widget>[
         Padding(
@@ -32,7 +22,7 @@ class _HotelCarouselState extends State<HotelCarousel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               const Text(
-                'Hoteles Exclusivos',
+                'Restaurantes de calidad',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -43,7 +33,7 @@ class _HotelCarouselState extends State<HotelCarousel> {
               ),
               GestureDetector(
                 onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Hoteles())),
+                    MaterialPageRoute(builder: (_) => const Restaurantes())),
                 child: const Text(
                   'Ver todos',
                   style: TextStyle(
@@ -61,18 +51,11 @@ class _HotelCarouselState extends State<HotelCarousel> {
           height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: hotels.length,
+            itemCount: restaurantes.length,
             itemBuilder: (BuildContext context, int index) {
-              Hotel hotel = hotels[index];
+              Restaurant restaurant = restaurantes[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HabitacionPage(
-                      hotel: hotel,
-                    ),
-                  ),
-                ),
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   width: 240,
@@ -83,7 +66,7 @@ class _HotelCarouselState extends State<HotelCarousel> {
                         bottom: 15,
                         child: Container(
                           height: 120,
-                          width: 240,
+                          width: 225,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -94,7 +77,7 @@ class _HotelCarouselState extends State<HotelCarousel> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Text(
-                                  hotel.name,
+                                  restaurant.name,
                                   style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
@@ -103,13 +86,19 @@ class _HotelCarouselState extends State<HotelCarousel> {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  hotel.address,
+                                  restaurant.address,
                                   style: const TextStyle(
                                     color: Colors.grey,
                                   ),
                                 ),
                                 const SizedBox(height: 2),
-                                _buildRatingStars(hotel.stars),
+                                Text(
+                                  '${restaurant.price} Bs./ plato',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -131,8 +120,8 @@ class _HotelCarouselState extends State<HotelCarousel> {
                           borderRadius: BorderRadius.circular(20),
                           child: Image(
                             height: 180,
-                            width: 220,
-                            image: AssetImage(hotel.imageUrl),
+                            width: 210,
+                            image: AssetImage(restaurant.imageUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
