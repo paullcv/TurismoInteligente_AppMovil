@@ -18,7 +18,7 @@ class Perfil extends StatefulWidget {
 }
 
 Future<String?> user_profile() async {
-  final url = Uri.parse("http://192.168.0.20:8080/api/user-profile");
+  final url = Uri.parse("http://192.168.0.14:8080/api/user-profile");
   SharedPreferences pref = await SharedPreferences.getInstance();
   String token = pref.getString("token").toString();
   final resp = await http.get(url, headers: {
@@ -48,7 +48,7 @@ class _PerfilState extends State<Perfil> {
   @override
   void initState() {
     super.initState();
-    user_profile();
+    //user_profile();
   }
 
   @override
@@ -145,7 +145,7 @@ class _PerfilState extends State<Perfil> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 650, left: 150),
-                child: FlatButton(
+                child: MaterialButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -204,7 +204,7 @@ void _alerta(BuildContext context) {
 Future<void> _cerrarSesion(context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = prefs.getString("token").toString();
-  var url = Uri.parse("http://192.168.0.20:8080/api/logout");
+  var url = Uri.parse("http://192.168.0.14:8080/api/logout");
   var resp = await http.get(url, headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',

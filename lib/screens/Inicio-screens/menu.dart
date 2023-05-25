@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:turismo/routes/rutas-menu.dart';
-import 'package:turismo/screens/Inicio-screens/perfil.dart';
 import 'package:turismo/widgets/bottom-nav.dart';
 import 'package:turismo/widgets/curved-bottom-nav.dart';
 
@@ -25,7 +24,7 @@ class _InicioState extends State<Menu> {
         index = i;
       });
     });
-    user_profile();
+    //user_profile();
     super.initState();
   }
 

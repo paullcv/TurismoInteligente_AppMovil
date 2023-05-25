@@ -160,7 +160,7 @@ class LoginPage extends StatelessWidget {
                             SizedBox(
                               height: 150,
                             ),
-                            FlatButton(
+                            MaterialButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -215,7 +215,7 @@ class LoginPage extends StatelessWidget {
 }
 
 Future<String?> _login(String _correo, String _contra, context) async {
-  final url = Uri.parse("http://192.168.0.20:8080/api/auth/login");
+  final url = Uri.parse("http://192.168.0.14:8080/api/auth/login");
   final resp =
       await http.post(url, body: {'email': _correo, 'password': _contra});
 

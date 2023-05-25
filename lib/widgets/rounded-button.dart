@@ -20,7 +20,7 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       // ignore: deprecated_member_use
-      child: FlatButton(
+      child: FloatingActionButton(
         onPressed: () {},
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),

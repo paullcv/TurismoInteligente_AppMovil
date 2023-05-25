@@ -51,7 +51,7 @@ class CreateNewAccount extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.06),
+                    SizedBox(height: size.height * 0.03),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Form(
@@ -145,7 +145,7 @@ class CreateNewAccount extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: size.height * 0.03),
+                            SizedBox(height: size.height * 0.01),
                             TextFormField(
                               controller: _contra,
                               autocorrect: false,
@@ -230,7 +230,7 @@ class CreateNewAccount extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: size.height * 0.1),
+                            SizedBox(height: size.height * 0.01),
                             TextFormField(
                               controller: _carnet,
                               autocorrect: false,
@@ -353,9 +353,9 @@ class CreateNewAccount extends StatelessWidget {
                                 return null;
                               },
                             ),
-                            SizedBox(height: size.height * 0.05),
+                            SizedBox(height: size.height * 0.04),
                             Center(
-                              child: FlatButton(
+                              child: MaterialButton(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
